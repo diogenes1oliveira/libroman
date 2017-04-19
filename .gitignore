@@ -27,3 +27,13 @@
 *.exe
 *.out
 *.app
+
+# KDE stuff
+.directory
+*.kate-swp
+
+# My compiled directories
+bin/*
+lib/*
+test/bin/*
+obj/*
