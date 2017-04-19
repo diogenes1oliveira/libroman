@@ -35,8 +35,19 @@ static int single_character_value(char c) {
 }
 
 int roman_to_int(const char *input) {
-	if(input == NULL || strlen(input) == 0)
+	int length;
+	int i;
+	int value = 0;
+	
+	if(input == NULL)
 		return -1;
 	
-	return single_character_value(input[0]);
+	length = strlen(input);
+	if(length <= 0)
+		return -1;
+	
+	for(i = length - 1; i >= 0; --i)
+		value += single_character_value(input[i]);
+	
+	return value;
 }
