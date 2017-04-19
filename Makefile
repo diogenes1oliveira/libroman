@@ -6,6 +6,7 @@ INCLUDE = include
 LIB = lib
 TEST_DIR = test
 
+FLAGS = -g
 LIBS = -lgtest -lpthread
 
 # The names of the files to compile
@@ -55,10 +56,10 @@ TESTS_BIN = $(addprefix $(TEST_DIR)/bin/, $(TESTS))
 all: $(LIB_FULLNAME) build-tests
 
 $(LIB_FULLNAME): $(OBJS)
-	$(CC) -shared -fPIC -Wl,-soname,$(LIB_NAME) -o $(LIB_FULLNAME) $(OBJS)
+	$(CC) $(FLAGS) -shared -fPIC -Wl,-soname,$(LIB_NAME) -o $(LIB_FULLNAME) $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC)/%.c $(HEADERS)
-	$(CC) -c -fPIC -o $@ $< $(HEADERS_FLAG)
+	$(CC) $(FLAGS) -c -fPIC -o $@ $< $(HEADERS_FLAG)
 
 run-tests: build-tests
 	$(foreach var,$(TESTS_BIN),LD_LIBRARY_PATH=$(LIB) ./$(var);) 
@@ -66,7 +67,7 @@ run-tests: build-tests
 build-tests: $(LIB_FULLNAME) $(TESTS_BIN)
 
 $(TEST_DIR)/bin/%: $(TEST_DIR)/%.c $(HEADERS) $(SOURCES)
-	$(CC) -o $@ $< $(HEADERS_FLAG) $(LIBS_FLAG) -l$(LIB_FINAL)
+	$(CC) $(FLAGS) -o $@ $< $(HEADERS_FLAG) $(LIBS_FLAG) -l$(LIB_FINAL)
 
 .PHONY: clean
 
