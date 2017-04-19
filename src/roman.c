@@ -34,10 +34,17 @@ static int single_character_value(char c) {
 	return value;
 }
 
+static int alg_can_repeat(char alg) {
+	return !(alg == 'V' || alg == 'L' || alg == 'D');
+}
+
 int roman_to_int(const char *input) {
 	int length;
 	int i;
 	int value = 0;
+	char algNow = '\0';
+	char algBefore = '\0';
+	int repetitions = 0;
 	
 	if(input == NULL)
 		return -1;
@@ -46,8 +53,25 @@ int roman_to_int(const char *input) {
 	if(length <= 0)
 		return -1;
 	
-	for(i = length - 1; i >= 0; --i)
-		value += single_character_value(input[i]);
+	for(i = length - 1; i >= 0; --i) {
+		algNow = input[i];
+		
+		if(repetitions > 3)
+			return -1;
+		
+		if(algBefore != algNow) {
+			repetitions = 1;
+		}
+		else {
+			if(!alg_can_repeat(algNow))
+				return -1;
+			
+			++repetitions;
+		}
+		
+		value += single_character_value(algNow);
+		algBefore = algNow;
+	}
 	
 	return value;
 }
