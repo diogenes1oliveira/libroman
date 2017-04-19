@@ -42,6 +42,7 @@ int roman_to_int(const char *input) {
 	int length;
 	int i;
 	int value = 0;
+	int valueNow = -1;
 	char algNow = '\0';
 	char algBefore = '\0';
 	int repetitions = 0;
@@ -69,7 +70,12 @@ int roman_to_int(const char *input) {
 			++repetitions;
 		}
 		
-		value += single_character_value(algNow);
+		valueNow = single_character_value(algNow);
+		
+		if(valueNow == -1)
+			return -1;
+		
+		value += valueNow;
 		algBefore = algNow;
 	}
 	
