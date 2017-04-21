@@ -15,9 +15,18 @@ TEST(SubtractingInput, WrongOrder) {
 
 
 TEST(SubtractingInput, SingleSubtractingChar) {
+	EXPECT_EQ(roman_to_int("IV"), 4);
 	EXPECT_EQ(roman_to_int("IX"), 9);
 	EXPECT_EQ(roman_to_int("XCII"), 92);
 	EXPECT_EQ(roman_to_int("CMLXX"), 970);
+}
+
+
+TEST(SubtractingInput, MultipleSubtractingChar) {
+	EXPECT_EQ(roman_to_int("IIX"), -1);
+	EXPECT_EQ(roman_to_int("IIIV"), -1);
+	EXPECT_EQ(roman_to_int("XXCVI"), -1);
+	EXPECT_EQ(roman_to_int("XXCIV"), -1);
 }
 
 int main(int argc, char **argv) {
