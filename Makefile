@@ -89,7 +89,8 @@ $(TEST_DIR)/bin/%: $(TEST_DIR)/%.c $(HEADERS) $(SOURCES)
 
 clean:
 	rm -rf $(OBJ_DIR)/*
-	rm -rf $(TESTS_BIN)/*
+	rm -rf $(TESTS_BIN)
 	rm -rf $(LIB)/*
 	rm -rf $(BIN)/*
+	rm -rf *.gcno
 

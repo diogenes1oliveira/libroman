@@ -38,5 +38,5 @@ bin/*
 lib/*
 test/bin/*
 obj/*
-
+*.gcno
 
