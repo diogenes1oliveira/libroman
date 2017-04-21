@@ -38,6 +38,22 @@ static int alg_can_repeat(char alg) {
 	return !(alg == 'V' || alg == 'L' || alg == 'D');
 }
 
+static int alg_can_come_before(char now, char before) {
+	switch(now) {
+		case 'I':
+			return (before == 'X' || before == 'V');
+			break;
+		case 'X':
+			return (before == 'C' || before == 'L');
+			break;
+		case 'C':
+			return (before == 'D' || before == 'M');
+			break;
+		default:
+			return 0;
+	}
+}
+
 int roman_to_int(const char *input) {
 	int length;
 	int i;
@@ -76,7 +92,16 @@ int roman_to_int(const char *input) {
 		if(valueNow == -1)
 			return -1;
 		
-		value += valueNow;
+		if(valueNow < valueBefore) {
+			if(!alg_can_come_before(algNow, algBefore))
+				return -1;
+			
+			value -= valueNow;
+		}
+		else {
+			value += valueNow;
+		}
+		
 		algBefore = algNow;
 		valueBefore = valueNow;
 	}

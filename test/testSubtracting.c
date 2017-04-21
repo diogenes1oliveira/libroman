@@ -2,12 +2,22 @@
 #include "roman.h"
 
 TEST(SubtractingInput, WrongOrder) {
-	EXPECT_EQ(roman_to_int("VX"), -1);
-	EXPECT_EQ(roman_to_int("VM"), -1);
-	EXPECT_EQ(roman_to_int("VV"), -1);
+	EXPECT_EQ(roman_to_int("ICCV"), -1);
+	EXPECT_EQ(roman_to_int("IM"), -1);
+	EXPECT_EQ(roman_to_int("IDX"), -1);
 	
 	EXPECT_EQ(roman_to_int("XVX"), -1);
 	EXPECT_EQ(roman_to_int("DM"), -1);
+	
+	EXPECT_EQ(roman_to_int("LM"), -1);
+	EXPECT_EQ(roman_to_int("LCIX"), -1);
+}
+
+
+TEST(SubtractingInput, SingleSubtractingChar) {
+	EXPECT_EQ(roman_to_int("IX"), 9);
+	EXPECT_EQ(roman_to_int("XCII"), 92);
+	EXPECT_EQ(roman_to_int("CMLXX"), 970);
 }
 
 int main(int argc, char **argv) {
