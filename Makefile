@@ -1,16 +1,20 @@
 CC=g++
 
+BIN = bin
 OBJ_DIR = obj
 SRC = src
 INCLUDE = include
 LIB = lib
 TEST_DIR = test
 
-FLAGS = -g
+FLAGS = -g -ftest-coverage -fprofile-arcs
 LIBS = -lgtest -lpthread
 
-# The names of the files to compile
+# The names of the files to compile to create the library
 BASENAMES = roman
+
+# Files to compile to standalone binaries
+BINS = roman-to-int
 
 # Final dynamic library
 LIB_FINAL = roman
@@ -19,7 +23,7 @@ LIB_FINAL = roman
 TESTS = testSimple testIncreasing testSubtracting testUntil3000
 
 # Generating the final .so path
-LIB_NAME=lib$(LIB_FINAL).so
+LIB_NAME=lib$(LIB_FINAL).a
 LIB_FULLNAME = $(LIB)/$(LIB_NAME)
 
 # Generating include/*.h dependencies
@@ -29,6 +33,8 @@ HEADERS = $(addsuffix .h, $(_HEADERS))
 # Generating src/*.c dependencies
 _SOURCES = $(addprefix $(SRC)/, $(BASENAMES))
 SOURCES = $(addsuffix .c, $(_SOURCES))
+
+BIN_EXES= $(addprefix $(BIN)/, $(BINS))
 
 _OBJS = $(addprefix $(OBJ_DIR)/, $(BASENAMES))
 OBJS = $(addsuffix .o, $(_OBJS))
@@ -53,15 +59,22 @@ TESTS_SOURCE=$(addsuffix .c, $(_TESTS_SOURCE))
 TESTS_BIN = $(addprefix $(TEST_DIR)/bin/, $(TESTS))
 
 # The default target builds the .so library and all the tests
-all: $(LIB_FULLNAME) build-tests
+all: $(LIB_FULLNAME) build-tests bin
+
+# The target that builds the standalone binaries
+bin: $(BIN_EXES)
 
 $(LIB_FULLNAME): $(OBJS)
 	mkdir -p $(LIB)
-	$(CC) $(FLAGS) -shared -fPIC -Wl,-soname,$(LIB_NAME) -o $(LIB_FULLNAME) $(OBJS)
+	ar rcs $(LIB_FULLNAME) $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC)/%.c $(HEADERS)
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) -c -fPIC -o $@ $< $(HEADERS_FLAG)
+
+$(BIN)/%: $(SRC)/%.c $(HEADERS)
+	mkdir -p $(BIN)
+	$(CC) $(FLAGS) -o $@ $< $(HEADERS_FLAG) $(LIBS_FLAG) -l$(LIB_FINAL)
 
 run-tests: build-tests
 	$(foreach var,$(TESTS_BIN),LD_LIBRARY_PATH=$(LIB) ./$(var) || :;) 
@@ -78,4 +91,5 @@ clean:
 	rm -rf $(OBJ_DIR)/*
 	rm -rf $(TESTS_BIN)/*
 	rm -rf $(LIB)/*
+	rm -rf $(BIN)/*
 
