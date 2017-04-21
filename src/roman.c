@@ -76,7 +76,7 @@ int roman_to_int(const char *input) {
 	
 	/* This checks if the string is valid */
 	length = string_length(input);
-	if(length == -1)
+	if(length <= 0)
 		return -1;
 	
 	/* Loop through the string, starting from the end */
