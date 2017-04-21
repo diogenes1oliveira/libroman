@@ -93,4 +93,5 @@ clean:
 	rm -rf $(LIB)/*
 	rm -rf $(BIN)/*
 	rm -rf *.gcno
+	rm -rf *.gcda
 
