@@ -56,9 +56,11 @@ TESTS_BIN = $(addprefix $(TEST_DIR)/bin/, $(TESTS))
 all: $(LIB_FULLNAME) build-tests
 
 $(LIB_FULLNAME): $(OBJS)
+	mkdir -p $(LIB)
 	$(CC) $(FLAGS) -shared -fPIC -Wl,-soname,$(LIB_NAME) -o $(LIB_FULLNAME) $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC)/%.c $(HEADERS)
+	mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) -c -fPIC -o $@ $< $(HEADERS_FLAG)
 
 run-tests: build-tests
@@ -67,6 +69,7 @@ run-tests: build-tests
 build-tests: $(LIB_FULLNAME) $(TESTS_BIN)
 
 $(TEST_DIR)/bin/%: $(TEST_DIR)/%.c $(HEADERS) $(SOURCES)
+	mkdir -p $(TEST_DIR)/bin
 	$(CC) $(FLAGS) -o $@ $< $(HEADERS_FLAG) $(LIBS_FLAG) -l$(LIB_FINAL)
 
 .PHONY: clean
