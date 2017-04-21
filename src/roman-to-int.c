@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
 		fprintf(stderr, "Couldn't allocate memory.\n");
 		return 1;
 	}
+	memset(arg_str, 0, (arg_len + 1) * sizeof(char));
 	
 	for(int i = 0; i < arg_len; ++i)
 		arg_str[i] = toupper(argv[1][i]);
