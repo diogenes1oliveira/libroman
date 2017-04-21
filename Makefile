@@ -64,7 +64,7 @@ $(OBJ_DIR)/%.o: $(SRC)/%.c $(HEADERS)
 	$(CC) $(FLAGS) -c -fPIC -o $@ $< $(HEADERS_FLAG)
 
 run-tests: build-tests
-	$(foreach var,$(TESTS_BIN),LD_LIBRARY_PATH=$(LIB) ./$(var);) 
+	$(foreach var,$(TESTS_BIN),LD_LIBRARY_PATH=$(LIB) ./$(var) || :;) 
 
 build-tests: $(LIB_FULLNAME) $(TESTS_BIN)
 
