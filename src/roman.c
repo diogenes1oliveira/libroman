@@ -1,11 +1,20 @@
 #include "roman.h"
 
+#include <stdbool.h>
 #include <string.h>
 
-static int single_character_value(char c) {
+static int string_length(const char *str) {
+	return (
+		str == NULL ?
+		-1 :
+		strlen(str)
+	);
+}
+
+static int alg_value(char alg) {
 	int value;
 	
-	switch(c) {
+	switch(alg) {
 		case 'I':
 			value = 1;
 			break;
@@ -34,11 +43,11 @@ static int single_character_value(char c) {
 	return value;
 }
 
-static int alg_can_repeat(char alg) {
+static bool alg_can_repeat(char alg) {
 	return !(alg == 'V' || alg == 'L' || alg == 'D');
 }
 
-static int alg_can_come_before(char now, char before) {
+static bool alg_can_come_before(char now, char before) {
 	switch(now) {
 		case 'I':
 			return (before == 'X' || before == 'V');
@@ -50,28 +59,27 @@ static int alg_can_come_before(char now, char before) {
 			return (before == 'D' || before == 'M');
 			break;
 		default:
-			return 0;
+			return false;
 	}
 }
 
 int roman_to_int(const char *input) {
 	int length;
 	int i;
-	int value = 0;
+	int finalValue = 0;
 	int valueNow = -1;
 	int valueBefore = -1;
 	char algNow = '\0';
 	char algBefore = '\0';
 	int repetitions = 0;
-	int isSubtracting = 0;
+	bool isSubtracting = false;
 	
-	if(input == NULL)
+	/* This checks if the string is valid */
+	length = string_length(input);
+	if(length == -1)
 		return -1;
 	
-	length = strlen(input);
-	if(length <= 0)
-		return -1;
-	
+	/* Loop through the string, starting from the end */
 	for(i = length - 1; i >= 0; --i) {
 		algNow = input[i];
 		
@@ -88,29 +96,34 @@ int roman_to_int(const char *input) {
 			++repetitions;
 		}
 		
+		/* A smaller algarism coming before a greater one (IX, for instance)
+		 * can't be repeated.
+		 */
 		if(isSubtracting && repetitions >= 2)
 			return -1;
 		
-		valueNow = single_character_value(algNow);
-		
+		valueNow = alg_value(algNow);
 		if(valueNow == -1)
 			return -1;
 		
+		/* If TRUE, I am in the subtracting mode: a smaller algarism coming
+		 * before a greater one.
+		 */
 		if(valueNow < valueBefore) {
 			if(!alg_can_come_before(algNow, algBefore))
 				return -1;
 			
-			value -= valueNow;
-			isSubtracting = 1;
+			finalValue -= valueNow;
+			isSubtracting = true;
 		}
 		else {
-			value += valueNow;
-			isSubtracting = 0;
+			finalValue += valueNow;
+			isSubtracting = false;
 		}
 		
 		algBefore = algNow;
 		valueBefore = valueNow;
 	}
 	
-	return value;
+	return finalValue;
 }
