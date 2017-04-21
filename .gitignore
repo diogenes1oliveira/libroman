@@ -31,6 +31,7 @@
 # KDE stuff
 .directory
 *.kate-swp
+*.fuse*
 
 # My compiled directories
 bin/*
