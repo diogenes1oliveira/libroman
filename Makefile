@@ -92,6 +92,5 @@ clean:
 	rm -rf $(TESTS_BIN)
 	rm -rf $(LIB)/*
 	rm -rf $(BIN)/*
-	rm -rf *.gcno
-	rm -rf *.gcda
+	rm -rf *.gc*
 

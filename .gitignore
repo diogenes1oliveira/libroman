@@ -38,6 +38,5 @@ bin/*
 lib/*
 test/bin/*
 obj/*
-*.gcno
-*.gcda
+*.gc*
 
