@@ -16,7 +16,7 @@ BASENAMES = roman
 LIB_FINAL = roman
 
 # The names of the tests to run
-TESTS = testSimple testIncreasing testSubtracting
+TESTS = testSimple testIncreasing testSubtracting testUntil3000
 
 # Generating the final .so path
 LIB_NAME=lib$(LIB_FINAL).so
