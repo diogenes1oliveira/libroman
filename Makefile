@@ -57,6 +57,7 @@ HEADERS_FLAG = $(addprefix -I, $(_HEADERS_FLAG))
 _TESTS_SOURCE=$(addprefix $(TEST_DIR)/, $(TESTS))
 TESTS_SOURCE=$(addsuffix .c, $(_TESTS_SOURCE))
 TESTS_BIN = $(addprefix $(TEST_DIR)/bin/, $(TESTS))
+TESTS_BIN_2 = : $(TESTS_BIN)
 
 # The default target builds the .so library and all the tests
 all: $(LIB_FULLNAME) build-tests bin
@@ -78,7 +79,7 @@ $(BIN)/%: $(SRC)/%.c $(HEADERS)
 	$(CC) $(FLAGS) -o $@ $(OBJ_DIR)/$*.o $(HEADERS_FLAG) $(LIBS_FLAG) -l$(LIB_FINAL)
 
 run-tests: build-tests
-	$(foreach var,$(TESTS_BIN),LD_LIBRARY_PATH=$(LIB) ./$(var);) 
+	LD_LIBRARY_PATH=$(LIB) $(foreach var,$(TESTS_BIN),./$(var) && ) :
 
 build-tests: $(LIB_FULLNAME) $(TESTS_BIN) $(BIN_EXES)
 
