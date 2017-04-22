@@ -83,9 +83,6 @@ int roman_to_int(const char *input) {
 	for(i = length - 1; i >= 0; --i) {
 		algNow = input[i];
 		
-		if(repetitions > 3)
-			return -1;
-		
 		if(algBefore != algNow) {
 			repetitions = 1;
 		}
@@ -100,6 +97,9 @@ int roman_to_int(const char *input) {
 		 * can't be repeated.
 		 */
 		if(isSubtracting && repetitions >= 2)
+			return -1;
+		
+		if(repetitions > 3)
 			return -1;
 		
 		valueNow = alg_value(algNow);

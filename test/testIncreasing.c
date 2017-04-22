@@ -26,9 +26,9 @@ TEST(ComplexInput, NonRepeatableCharacters) {
 }
 
 TEST(ComplexInput, TooManyRepetitions) {
-	//~ EXPECT_EQ(roman_to_int("XXXXX"), -1);
-	//~ EXPECT_EQ(roman_to_int("MMMM"), -1);
-	//~ EXPECT_EQ(roman_to_int("IIIIIIII"), -1);
+	EXPECT_EQ(roman_to_int("XXXXX"), -1);
+	EXPECT_EQ(roman_to_int("MMMM"), -1);
+	EXPECT_EQ(roman_to_int("IIIIIIII"), -1);
 	
 	EXPECT_EQ(roman_to_int("MIIII"), -1);
 	EXPECT_EQ(roman_to_int("DXXXX"), -1);
