@@ -1,2 +1,2 @@
-# metodos-trabalho02
-2o. trabalho da disciplina de Métodos de Programação 1
+# libroman
+A library to convert Roman numerals to their integer values.
