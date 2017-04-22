@@ -40,11 +40,11 @@ _OBJS = $(addprefix $(OBJ_DIR)/, $(BASENAMES))
 OBJS = $(addsuffix .o, $(_OBJS))
 
 # Setting up gtest
-GTEST_ROOT_DIR=../googletest-master
+GTEST_ROOT_DIR?=../googletest-master
 # GTEST_LIB_DIR must point to where is libgtest.a
-GTEST_LIB_DIR=$(GTEST_ROOT_DIR)/build/googlemock/gtest
+GTEST_LIB_DIR?=$(GTEST_ROOT_DIR)/build/googlemock/gtest
 # GTEST_INCLUDE_DIR must point to where the include directory "gtest" is
-GTEST_INCLUDE_DIR=$(GTEST_ROOT_DIR)/googletest/include
+GTEST_INCLUDE_DIR?=$(GTEST_ROOT_DIR)/googletest/include
 
 # Paths pointing to where the libraries are
 LIBS_DIR = $(GTEST_LIB_DIR) $(LIB)
