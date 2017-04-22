@@ -7,7 +7,7 @@ INCLUDE = include
 LIB = lib
 TEST_DIR = test
 
-FLAGS = -g -ftest-coverage -fprofile-arcs
+FLAGS = -g -ftest-coverage -fprofile-arcs -fPIC -O0
 LIBS = -lgtest -lpthread
 
 # The names of the files to compile to create the library
@@ -70,7 +70,7 @@ $(LIB_FULLNAME): $(OBJS)
 
 $(OBJ_DIR)/%.o: $(SRC)/%.c $(HEADERS)
 	mkdir -p $(OBJ_DIR)
-	$(CC) $(FLAGS) -c -fPIC -o $@ $< $(HEADERS_FLAG)
+	$(CC) $(FLAGS) -c -o $@ $< $(HEADERS_FLAG)
 
 $(BIN)/%: $(SRC)/%.c $(HEADERS)
 	mkdir -p $(BIN)
