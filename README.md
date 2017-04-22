@@ -18,6 +18,7 @@ in your system. The easiest way is to clone the
 directory in your local path and then build it using `cmake`:
 
 ```bash
+cd /home/foo/
 git clone https://github.com/google/googletest
 cd googletest
 mkdir build && cd build
@@ -27,7 +28,7 @@ cmake .. && make
 You can then `cd` to this project root folder `libroman` and pass the GTest
 root directory as the variable `GTEST_ROOT_DIR` to the `make` command.
 ```bash
-cd libroman
+cd /home/foo/libroman
 make GTEST_ROOT_DIR=/home/foo/googletest
 ```
 
@@ -35,13 +36,16 @@ If not, you'll need to provide the paths to GTest as variables
 to the `make` command:
 
 ```bash
+cd /home/foo/libroman
 make GTEST_LIB_DIR=/home/foo/gtest-lib-path GTEST_INCLUDE_DIR=/home/foo/gtest-include-path
 ```
 
 + `GTEST_LIB_DIR` points to where the library .a file is. Defaults to
-	GTEST_ROOT_DIR/build/googlemock/gtest.
+	`GTEST_ROOT_DIR/build/googlemock/gtest`.
 + `GTEST_INCLUDE_DIR` must point to where the include directory ```gtest``` is.
-	Defaults to GTEST_ROOT_DIR/googletest/include.
+	`Defaults to GTEST_ROOT_DIR/googletest/include`.
+
+To run the tests, simply run `make run-tests`.
 
 Using the library
 -----------------
@@ -62,7 +66,18 @@ And then you need to compile your program linking it against the `libroman.a`
 static library in the `lib/` directory, including the header directory as well:
 
 ```bash
-g++ -o bar bar.c -I libroman/include -L libroman/lib -lroman
+g++ -o bar bar.c -I /home/foo/libroman/include -L /home/foo/libroman/lib -lroman
+```
+
+Using the standalone binary
+---------------------------
+There's a standalone binary `roman-to-int` in the `bin/` directory that accepts
+Roman numerical strings as its only command-line argument, and prints to stdout
+its numerical integer value. For example, the code below outputs `12`:
+
+```bash
+cd /home/foo/libroman
+./bin/roman-to-int XII
 ```
 
 Roman numerical system
