@@ -20,7 +20,7 @@ BINS = roman-to-int
 LIB_FINAL = roman
 
 # The names of the tests to run
-TESTS = testSimple testIncreasing testSubtracting testUntil3000
+TESTS = testSimple testIncreasing testSubtracting testUntil3000 testBin3000
 
 # Generating the final .so path
 LIB_NAME=lib$(LIB_FINAL).a
@@ -79,7 +79,7 @@ $(BIN)/%: $(SRC)/%.c $(HEADERS)
 run-tests: build-tests
 	$(foreach var,$(TESTS_BIN),LD_LIBRARY_PATH=$(LIB) ./$(var) || :;) 
 
-build-tests: $(LIB_FULLNAME) $(TESTS_BIN)
+build-tests: $(LIB_FULLNAME) $(TESTS_BIN) $(BIN_EXES)
 
 $(TEST_DIR)/bin/%: $(TEST_DIR)/%.c $(HEADERS) $(SOURCES)
 	mkdir -p $(TEST_DIR)/bin
