@@ -3,6 +3,12 @@
 #include <stdbool.h>
 #include <string.h>
 
+/**
+ * Returns the length of a valid string.
+ * 
+ * If the string is not valid (i.e., NULL or empty),
+ * returns -1.
+ */
 static int string_length(const char *str) {
 	return (
 		str == NULL ?
@@ -11,6 +17,20 @@ static int string_length(const char *str) {
 	);
 }
 
+/**
+ * Returns the integer value of a single Roman algarism.
+ * 
+ * The corresponding value is given in the table below:
+ * | Character | Value |
+ * |-----------|-------|
+ * |     I     |    1  |
+ * |     V     |    5  |
+ * |     X     |   10  |
+ * |     L     |   50  |
+ * |     C     |  100  |
+ * |     D     |  500  |
+ * |     M     | 1000  |
+ */
 static int alg_value(char alg) {
 	int value;
 	
@@ -43,10 +63,25 @@ static int alg_value(char alg) {
 	return value;
 }
 
+/**
+ * Checks if the Roman algarism is repeatable (i.e., it's not 'V', 'L' or 'D').
+ */
 static bool alg_can_repeat(char alg) {
 	return !(alg == 'V' || alg == 'L' || alg == 'D');
 }
 
+/**
+ * Checks if the Roman algarism `now` can come before the character `before`
+ * in a valid string, meaning its value is negative. The rules for such
+ * preceding characters are as below:
+ * 
+ * | Character     | Can appear before |
+ * |---------------|-------------------|
+ * |    'I'        |    V, X           |
+ * |    'X'        |    L, C           |
+ * |    'C'        |    D, M           |
+ * | 'V', 'L', 'D' |    None           |
+ */
 static bool alg_can_come_before(char now, char before) {
 	switch(now) {
 		case 'I':
