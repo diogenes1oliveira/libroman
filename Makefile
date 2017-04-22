@@ -74,7 +74,8 @@ $(OBJ_DIR)/%.o: $(SRC)/%.c $(HEADERS)
 
 $(BIN)/%: $(SRC)/%.c $(HEADERS)
 	mkdir -p $(BIN)
-	$(CC) $(FLAGS) -o $@ $< $(HEADERS_FLAG) $(LIBS_FLAG) -l$(LIB_FINAL)
+	$(CC) $(FLAGS) -c -o $(OBJ_DIR)/$*.o $< $(HEADERS_FLAG)
+	$(CC) $(FLAGS) -o $@ $(OBJ_DIR)/$*.o $(HEADERS_FLAG) $(LIBS_FLAG) -l$(LIB_FINAL)
 
 run-tests: build-tests
 	$(foreach var,$(TESTS_BIN),LD_LIBRARY_PATH=$(LIB) ./$(var) || :;) 
@@ -83,14 +84,17 @@ build-tests: $(LIB_FULLNAME) $(TESTS_BIN)
 
 $(TEST_DIR)/bin/%: $(TEST_DIR)/%.c $(HEADERS) $(SOURCES)
 	mkdir -p $(TEST_DIR)/bin
-	$(CC) $(FLAGS) -o $@ $< $(HEADERS_FLAG) $(LIBS_FLAG) -l$(LIB_FINAL)
+	mkdir -p $(TEST_DIR)/obj
+	$(CC) $(FLAGS) -c -o $(TEST_DIR)/obj/$*.o $< $(HEADERS_FLAG)
+	$(CC) $(FLAGS) -o $@ $(TEST_DIR)/obj/$*.o $(HEADERS_FLAG) $(LIBS_FLAG) -l$(LIB_FINAL)
 
 .PHONY: clean
 
 clean:
-	rm -rf $(OBJ_DIR)/*
-	rm -rf $(TESTS_BIN)
-	rm -rf $(LIB)/*
-	rm -rf $(BIN)/*
+	rm -rf $(OBJ_DIR)
+	rm -rf $(TEST_DIR)/bin
+	rm -rf $(TEST_DIR)/obj
+	rm -rf $(LIB)
+	rm -rf $(BIN)
 	rm -rf *.gc*
 
