@@ -78,7 +78,7 @@ $(BIN)/%: $(SRC)/%.c $(HEADERS)
 	$(CC) $(FLAGS) -o $@ $(OBJ_DIR)/$*.o $(HEADERS_FLAG) $(LIBS_FLAG) -l$(LIB_FINAL)
 
 run-tests: build-tests
-	$(foreach var,$(TESTS_BIN),LD_LIBRARY_PATH=$(LIB) ./$(var) || :;) 
+	$(foreach var,$(TESTS_BIN),LD_LIBRARY_PATH=$(LIB) ./$(var);) 
 
 build-tests: $(LIB_FULLNAME) $(TESTS_BIN)
 
