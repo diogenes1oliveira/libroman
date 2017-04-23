@@ -79,4 +79,18 @@ This test checks if the function behaves correctly when a string with invalid ch
     EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"MM\_1"}), -1);
 \}
 \end{DoxyCodeInclude}
- In this \href{https://github.com/diogenes1oliveira/libroman/commit/818abdde2a85e1c1924458c4f25cfff65835bc95#diff-3d6fc1bf772186c45fcd2c22d7ecd7b4}{\tt Github commit}, I made the function comply to this test by making it return {\ttfamily -\/1} when encountering an invalid character. 
+ In this \href{https://github.com/diogenes1oliveira/libroman/commit/818abdde2a85e1c1924458c4f25cfff65835bc95#diff-3d6fc1bf772186c45fcd2c22d7ecd7b4}{\tt Github commit}, I made the function comply to this test by making it return {\ttfamily -\/1} when encountering an invalid character.
+
+\subsection*{Sixth test -\/ subtracting before repeating characters }
+
+This test was made way after the other tests, when I checked that strings like I\+XX weren\textquotesingle{}t being recognized as invalid. So this one checks if the function is behaving properly when a subtracting character is put before an already repeating character.
+
+
+\begin{DoxyCodeInclude}
+\hyperlink{test_simple_8c_aff9fa977573ddab7597e233f1775d7c5}{TEST}(ComplexInput, SubtractingBeforeRepetition) \{
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"IXX"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"CMMM"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"XCC"}), -1);
+\}
+\end{DoxyCodeInclude}
+ In this \href{https://github.com/diogenes1oliveira/libroman/commit/2cd1eaf9f7230c4bff2776c36d46a7cce91239d0#diff-3d6fc1bf772186c45fcd2c22d7ecd7b4}{\tt Github commit}, I commited the needed correction to the function. 
