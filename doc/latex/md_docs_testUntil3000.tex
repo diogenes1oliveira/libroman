@@ -1,0 +1,26 @@
+Tests for a list until 3000\+: \hyperlink{test_until3000_8c}{test/test\+Until3000.\+c}
+
+\subsection*{First test -\/ until 3000 }
+
+This test reads a table with the Roman numerals from 1 to 3000, to see if the function is working for all these values\+: \href{https://github.com/diogenes1oliveira/libroman/commit/f2da07134c34bde40ee4b86f744e9799e9fe8684#diff-15b74e5de5c5d34117039a1dcc826f5d}{\tt Git\+Hub commit}
+
+
+\begin{DoxyCodeInclude}
+\hyperlink{test_simple_8c_aff9fa977573ddab7597e233f1775d7c5}{TEST}(TestingList, TestingUntil3000) \{
+    FILE *fp = fopen(\textcolor{stringliteral}{"test/data/romans-until-3000.dat"}, \textcolor{stringliteral}{"r"});
+    ASSERT\_TRUE(fp != NULL);
+    \textcolor{keywordtype}{char} buffer[\hyperlink{test_until3000_8c_afff9b137f11d394618b464995fe76f99}{LINE\_MAX\_SIZE}];
+    
+    \textcolor{keywordflow}{while}(fgets(buffer, \hyperlink{test_until3000_8c_afff9b137f11d394618b464995fe76f99}{LINE\_MAX\_SIZE}, fp)) \{
+        \textcolor{keywordtype}{int} value;
+        \textcolor{keywordtype}{char} roman[\hyperlink{test_until3000_8c_afff9b137f11d394618b464995fe76f99}{LINE\_MAX\_SIZE}];
+        
+        \textcolor{keywordflow}{if}(sscanf(buffer, \textcolor{stringliteral}{"%d %49s "}, &value, roman) != 2)
+            \textcolor{keywordflow}{continue};
+        
+        EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(roman), value);
+    \}
+    
+    fclose(fp);
+\}
+\end{DoxyCodeInclude}
