@@ -53,4 +53,16 @@ In this [Github commit](https://github.com/diogenes1oliveira/libroman/commit/818
 I made the function comply to this test by making it return `-1` when
 encountering an invalid character.
 
+Sixth test - subtracting before repeating characters
+----------------------------------------------------
+
+This test was made way after the other tests, when I checked that strings like
+IXX weren't being recognized as invalid. So this one checks if the function
+is behaving properly when a subtracting character is put before an already
+repeating character.
+
+\snippet test/testIncreasing.c ComplexInput, SubtractingBeforeRepetition
+
+In this [Github commit](https://github.com/diogenes1oliveira/libroman/commit/2cd1eaf9f7230c4bff2776c36d46a7cce91239d0#diff-3d6fc1bf772186c45fcd2c22d7ecd7b4), 
+I commited the needed correction to the function.
 
