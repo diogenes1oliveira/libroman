@@ -1,0 +1,74 @@
+This project was made as an assignment for the course {\itshape Métodos de Programação 1} (Programming Methods 101), Computing Department, UnB, April 22nd, 2017. It consists in a library to convert Roman numbers to their integer values.
+
+See the \hyperlink{md_README}{R\+E\+A\+D\+ME} for details about how to build, run and test the library and a little explanation about the inner workings of the Roman numbers.
+
+\subsection*{Development }
+
+I used the test-\/driven development (T\+DD) for the coding of this library. The tests were coded (and then the needed code to satisfy them) and developed as in the sucession below\+:
+
+
+\begin{DoxyEnumerate}
+\item \hyperlink{md_doc_testSimple}{test\+Simple}, where I check if basic input strings are correctly handled.
+\item \hyperlink{md_doc_testIncreasing}{test\+Increasing}, where I check if the case in which we have only increasing algarisms.
+\item \hyperlink{md_doc_testSubtracting}{test\+Subtracting}, where I check the case for subtracting algarisms, i.\+e., IV or XM.
+\item \hyperlink{md_doc_testUntil3000}{test\+Until3000}, where I check from a list from 1 to 3000.
+\item \hyperlink{md_doc_testBin}{test\+Bin}, where I check the standalone binary for inconsistencies.
+\end{DoxyEnumerate}
+
+The final version of the code library can be found in \hyperlink{roman_8c}{src/roman.\+c} and in \hyperlink{roman-to-int_8c}{src/roman-\/to-\/int.\+c} , the final version of the standalone binary.
+
+\subsection*{Test code coverage }
+
+I then checked the test coverage using the gcov tool, yielding the following results\+:
+
+
+\begin{DoxyCode}
+gcov obj/roman.o
+File \textcolor{stringliteral}{'src/roman.c'}
+Lines executed:100.00% of 64
+\end{DoxyCode}
+
+
+
+\begin{DoxyCode}
+gcov obj/roman-to-\textcolor{keywordtype}{int}.o
+File \textcolor{stringliteral}{'src/roman-to-int.c'}
+Lines executed:90.48% of 21
+\end{DoxyCode}
+
+
+In the \hyperlink{roman-to-int_8c}{src/roman-\/to-\/int.\+c} file, the non-\/executed lines are referring to the check in case malloc() fails, which is a very unlikely case.
+
+
+\begin{DoxyCode}
+\textcolor{keywordflow}{if}(arg\_str == NULL) \{
+    fprintf(stderr, \textcolor{stringliteral}{"Couldn't allocate memory.\(\backslash\)n"});
+    \textcolor{keywordflow}{return} 1;
+\}
+\end{DoxyCode}
+
+
+The corresponding .gcov files can be found in the following links\+: roman.\+c.\+gcov and roman-\/to-\/int.\+c.\+gcov
+
+\subsection*{Static analysis }
+
+I ran the command {\ttfamily cppcheck -\/-\/enable=warning .} in the source code directory, obtaining the following results\+:
+
+
+\begin{DoxyCode}
+Checking src/roman-to-\textcolor{keywordtype}{int}.c...
+1/7 files checked 14% done
+Checking src/roman.c...
+2/7 files checked 28% done
+Checking test/testBin.c...
+3/7 files checked 42% done
+Checking test/testIncreasing.c...
+4/7 files checked 57% done
+Checking test/testSimple.c...
+5/7 files checked 71% done
+Checking test/testSubtracting.c...
+6/7 files checked 85% done
+Checking test/testUntil3000.c...
+7/7 files checked 100% done
+\end{DoxyCode}
+ 

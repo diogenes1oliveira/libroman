@@ -1,0 +1,82 @@
+Tests for more complex inputs\+: \hyperlink{test_increasing_8c}{test/test\+Increasing.\+c}
+
+\subsection*{First test -\/ multiple single characters }
+
+The first test I did checks if the function is returning the right values for strings with repeatable characters (I, X, C and M).
+
+
+\begin{DoxyCodeInclude}
+\hyperlink{test_simple_8c_aff9fa977573ddab7597e233f1775d7c5}{TEST}(ComplexInput, MultipleSingleCharacters) \{
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"II"}), 2);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"XXX"}), 30);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"L"}), 50);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"CC"}), 200);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"CCC"}), 300);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"MM"}), 2000);
+\}
+\end{DoxyCodeInclude}
+ This test was satisfied by creating a loop through the string to add all the values in it, as can be seen in this \href{https://github.com/diogenes1oliveira/libroman/commit/637a23468d94b2257037522e7fdd3f34160322ab#diff-3d6fc1bf772186c45fcd2c22d7ecd7b4}{\tt Git\+Hub commit}.
+
+\subsection*{Second test -\/ increasing characters }
+
+The first test I did just checks if the function handles correctly inputs with multiple, but strictly increasing values for its algarisms.
+
+
+\begin{DoxyCodeInclude}
+\hyperlink{test_simple_8c_aff9fa977573ddab7597e233f1775d7c5}{TEST}(ComplexInput, IncreasingCharacters) \{
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"XI"}), 11);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"XII"}), 12);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"VI"}), 6);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"LX"}), 60);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"MDXX"}), 1520);
+\}
+\end{DoxyCodeInclude}
+ \subsection*{Third test -\/ non-\/repeatable characters }
+
+This snippet checks if the function fails (as expected) for strings where one of the non-\/repeatable characters (V, L or D) appear more than once.
+
+
+\begin{DoxyCodeInclude}
+\hyperlink{test_simple_8c_aff9fa977573ddab7597e233f1775d7c5}{TEST}(ComplexInput, NonRepeatableCharacters) \{
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"VV"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"DDD"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"LL"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"MDDX"}), -1);
+\}
+\end{DoxyCodeInclude}
+ \subsection*{Fourth test -\/ too many repetitions }
+
+This snippet checks if the function fails when the repeatable characters (I, X, C or D) repeat more than 3 times.
+
+
+\begin{DoxyCodeInclude}
+\hyperlink{test_simple_8c_aff9fa977573ddab7597e233f1775d7c5}{TEST}(ComplexInput, TooManyRepetitions) \{
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"XXXXX"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"MMMM"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"IIIIIIII"}), -1);
+    
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"MIIII"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"DXXXX"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"LXXXXX"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"MMMMMDXII"}), -1);
+\}
+\end{DoxyCodeInclude}
+ To satisfy the 2nd, 3rd and 4th tests, the function was altered as in this \href{https://github.com/diogenes1oliveira/libroman/commit/2da558c048fbe2a989ed9bceddb52fc4b1b615b7#diff-3d6fc1bf772186c45fcd2c22d7ecd7b4}{\tt Github commit}. I added a check function to see if the character is repeatable and then, in the main {\ttfamily \hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\+\_\+to\+\_\+int()}} function, I checked if the repeatable ones weren\textquotesingle{}t repeating too much (more than 3 times).
+
+\subsection*{Fifth test -\/ invalid characters }
+
+This test checks if the function behaves correctly when a string with invalid characters is passed as the input\+:
+
+
+\begin{DoxyCodeInclude}
+\hyperlink{test_simple_8c_aff9fa977573ddab7597e233f1775d7c5}{TEST}(ComplexInput, InvalidCharacter) \{
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"A"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"XXe"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"xx"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"AMMMI"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"C "}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"D  I"}), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"MM\_1"}), -1);
+\}
+\end{DoxyCodeInclude}
+ In this \href{https://github.com/diogenes1oliveira/libroman/commit/818abdde2a85e1c1924458c4f25cfff65835bc95#diff-3d6fc1bf772186c45fcd2c22d7ecd7b4}{\tt Github commit}, I made the function comply to this test by making it return {\ttfamily -\/1} when encountering an invalid character. 

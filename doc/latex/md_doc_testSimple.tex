@@ -1,0 +1,32 @@
+Starting with tests for simple inputs\+: \hyperlink{test_simple_8c}{test/test\+Simple.\+c}
+
+\subsection*{First test -\/ sanity of the input }
+
+The first test I did just checks if the function handles correctly non-\/valid strings i.\+e., empty or N\+U\+LL strings\+:
+
+
+\begin{DoxyCodeInclude}
+\hyperlink{test_simple_8c_aff9fa977573ddab7597e233f1775d7c5}{TEST}(SimpleInput, InvalidInput) \{
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(NULL), -1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{""}), -1);
+\}
+\end{DoxyCodeInclude}
+
+
+\subsection*{Second test -\/ single characters }
+
+The second test involves checking if the conversion for single characters is working as expected\+:
+
+
+\begin{DoxyCodeInclude}
+\hyperlink{test_simple_8c_aff9fa977573ddab7597e233f1775d7c5}{TEST}(SimpleInput, SingleCharacter) \{
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"I"}), 1);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"V"}), 5);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"X"}), 10);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"L"}), 50);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"C"}), 100);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"D"}), 500);
+    EXPECT\_EQ(\hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\_to\_int}(\textcolor{stringliteral}{"M"}), 1000);
+\}
+\end{DoxyCodeInclude}
+ The resulting code after these tests can be seen in this \href{https://github.com/diogenes1oliveira/libroman/commit/e9c1c6680af03fe397e5194c65434c857d4dd20d?diff=split#diff-3d6fc1bf772186c45fcd2c22d7ecd7b4}{\tt Git\+Hub commit}. In a nutshell, I added a test for the validity of the string, making the function {\ttfamily \hyperlink{roman_8c_a5d15ad3ed29e4dc0fed9b718523c48c8}{roman\+\_\+to\+\_\+int()}} pass the first test. Then I added the function {\ttfamily single\+\_\+character\+\_\+value()} to return the numerical value of a Roman character, satisfying the second test. 

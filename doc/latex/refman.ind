@@ -1,0 +1,93 @@
+\begin{theindex}
+
+  \item {alg\+\_\+can\+\_\+come\+\_\+before}
+    \subitem {roman.\+c}, \hyperpage{21}
+  \item {alg\+\_\+can\+\_\+repeat}
+    \subitem {roman.\+c}, \hyperpage{22}
+  \item {alg\+\_\+value}
+    \subitem {roman.\+c}, \hyperpage{22}
+
+  \indexspace
+
+  \item {doc/test\+Bin.\+md}, \hyperpage{19}
+  \item {doc/test\+Increasing.\+md}, \hyperpage{19}
+  \item {doc/test\+Simple.\+md}, \hyperpage{19}
+  \item {doc/test\+Subtracting.\+md}, \hyperpage{19}
+  \item {doc/test\+Until3000.\+md}, \hyperpage{19}
+
+  \indexspace
+
+  \item {include/roman.\+h}, \hyperpage{19}
+
+  \indexspace
+
+  \item {L\+I\+N\+E\+\_\+\+M\+A\+X\+\_\+\+S\+I\+ZE}
+    \subitem {test\+Until3000.\+c}, \hyperpage{28}
+
+  \indexspace
+
+  \item {main}
+    \subitem {roman-\/to-\/int.\+c}, \hyperpage{21}
+    \subitem {test\+Bin.\+c}, \hyperpage{23}
+    \subitem {test\+Increasing.\+c}, \hyperpage{24}
+    \subitem {test\+Simple.\+c}, \hyperpage{26}
+    \subitem {test\+Subtracting.\+c}, \hyperpage{27}
+    \subitem {test\+Until3000.\+c}, \hyperpage{28}
+  \item {mainpage.\+dox}, \hyperpage{20}
+
+  \indexspace
+
+  \item {R\+E\+A\+D\+M\+E.\+md}, \hyperpage{20}
+  \item {roman-\/to-\/int.\+c}
+    \subitem {main}, \hyperpage{21}
+  \item {roman.\+c}
+    \subitem {alg\+\_\+can\+\_\+come\+\_\+before}, \hyperpage{21}
+    \subitem {alg\+\_\+can\+\_\+repeat}, \hyperpage{22}
+    \subitem {alg\+\_\+value}, \hyperpage{22}
+    \subitem {roman\+\_\+to\+\_\+int}, \hyperpage{22}
+    \subitem {string\+\_\+length}, \hyperpage{22}
+  \item {roman.\+h}
+    \subitem {roman\+\_\+to\+\_\+int}, \hyperpage{20}
+  \item {roman\+\_\+to\+\_\+int}
+    \subitem {roman.\+c}, \hyperpage{22}
+    \subitem {roman.\+h}, \hyperpage{20}
+
+  \indexspace
+
+  \item {src/roman-\/to-\/int.\+c}, \hyperpage{20}
+  \item {src/roman.\+c}, \hyperpage{21}
+  \item {string\+\_\+length}
+    \subitem {roman.\+c}, \hyperpage{22}
+
+  \indexspace
+
+  \item {T\+E\+ST}
+    \subitem {test\+Bin.\+c}, \hyperpage{23}
+    \subitem {test\+Increasing.\+c}, \hyperpage{24, 25}
+    \subitem {test\+Simple.\+c}, \hyperpage{26}
+    \subitem {test\+Subtracting.\+c}, \hyperpage{27}
+    \subitem {test\+Until3000.\+c}, \hyperpage{28}
+  \item {test/test\+Bin.\+c}, \hyperpage{23}
+  \item {test/test\+Increasing.\+c}, \hyperpage{24}
+  \item {test/test\+Simple.\+c}, \hyperpage{25}
+  \item {test/test\+Subtracting.\+c}, \hyperpage{26}
+  \item {test/test\+Until3000.\+c}, \hyperpage{28}
+  \item {test\+Bin.\+c}
+    \subitem {main}, \hyperpage{23}
+    \subitem {T\+E\+ST}, \hyperpage{23}
+  \item {test\+Increasing.\+c}
+    \subitem {main}, \hyperpage{24}
+    \subitem {T\+E\+ST}, \hyperpage{24, 25}
+  \item {test\+Simple.\+c}
+    \subitem {main}, \hyperpage{26}
+    \subitem {T\+E\+ST}, \hyperpage{26}
+  \item {test\+Subtracting.\+c}
+    \subitem {main}, \hyperpage{27}
+    \subitem {T\+E\+ST}, \hyperpage{27}
+  \item {test\+Until3000.\+c}
+    \subitem {L\+I\+N\+E\+\_\+\+M\+A\+X\+\_\+\+S\+I\+ZE}, 
+		\hyperpage{28}
+    \subitem {main}, \hyperpage{28}
+    \subitem {T\+E\+ST}, \hyperpage{28}
+
+\end{theindex}

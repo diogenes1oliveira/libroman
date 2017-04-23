@@ -1,0 +1,19 @@
+Simple tests for the standalone binary
+
+\subsection*{First test -\/ standalone binary }
+
+This test just checks if the standalone binary fails when it\textquotesingle{}s passed the wrong command-\/line arguments. \href{https://github.com/diogenes1oliveira/libroman/commit/2430213c9b1377f093efbf6c92b445bf09657653#diff-b71fb74c402a09fc46ed4e34ffe34e75}{\tt Git\+Hub commit}
+
+
+\begin{DoxyCodeInclude}
+\hyperlink{test_simple_8c_aff9fa977573ddab7597e233f1775d7c5}{TEST}(TestingBin, ExitsGracefully) \{
+    EXPECT\_NE(system(\textcolor{stringliteral}{"./bin/roman-to-int"}), 0);
+    EXPECT\_NE(system(\textcolor{stringliteral}{"./bin/roman-to-int VI 38 --system"}), 0);
+    
+    EXPECT\_EQ(system(\textcolor{stringliteral}{"./bin/roman-to-int VI"}), 0);
+    EXPECT\_EQ(system(\textcolor{stringliteral}{"./bin/roman-to-int mIiI"}), 0);
+    
+    EXPECT\_NE(system(\textcolor{stringliteral}{"./bin/roman-to-int IM"}), 0);
+    EXPECT\_NE(system(\textcolor{stringliteral}{"./bin/roman-to-int XDI"}), 0);
+\}
+\end{DoxyCodeInclude}
