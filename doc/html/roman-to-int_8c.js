@@ -1,4 +1,0 @@
-var roman_to_int_8c =
-[
-    [ "main", "roman-to-int_8c.html#a0ddf1224851353fc92bfbff6f499fa97", null ]
-];
