@@ -80,6 +80,11 @@ cd /home/foo/libroman
 ./bin/roman-to-int XII
 ```
 
+Documentation
+-------------
+To read the docs, go to `doc/html/index.html` in your browser or open the file
+`doc/latex/refman.pdf`.
+
 Roman numerical system
 ----------------------
 The Roman numerical system is composed by assigning numerical values to
