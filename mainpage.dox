@@ -1,0 +1,88 @@
+/**
+ * \mainpage libroman - Documentation
+ * 
+ * This project was made as an assignment for the course *Métodos de Programação
+ * 1* (Programming Methods 101), Computing Department, UnB, April 22nd, 2017. It
+ * consists in a library to convert Roman numbers to their integer values.
+ * 
+ * See the [README](README.md) for details about how to build, run and test the
+ * library and a little explanation about the inner workings of the Roman
+ * numbers.
+ * 
+ * Development
+ * -----------
+ * 
+ * I used the test-driven development (TDD) for the coding of this library. The 
+ * tests were coded (and then the needed code to satisfy them) and developed
+ * as in the sucession below:
+ * 
+ * 1. [testSimple](doc/testSimple.md), where I check if basic input strings
+ * are correctly handled.
+ * 
+ * 2. [testIncreasing](doc/testIncreasing.md), where I check if the case in
+ * which we have only increasing algarisms.
+ * 
+ * 3. [testSubtracting](doc/testSubtracting.md), where I check the case for
+ * subtracting algarisms, i.e., IV or XM.
+ * 
+ * 4. [testUntil3000](doc/testUntil3000.md), where I check from a list from
+ * 1 to 3000.
+ * 
+ * 5. [testBin](doc/testBin.md), where I check the standalone binary for
+ * inconsistencies.
+ * 
+ * The final version of the code library can be found in src/roman.c and in
+ * src/roman-to-int.c , the final version of the standalone binary.
+ * 
+ * Test code coverage
+ * ------------------
+ * I then checked the test coverage using the gcov tool, yielding the following
+ * results:
+ * 
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * gcov obj/roman.o
+ * File 'src/roman.c'
+ * Lines executed:100.00% of 64
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * gcov obj/roman-to-int.o
+ * File 'src/roman-to-int.c'
+ * Lines executed:90.48% of 21
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ * In the src/roman-to-int.c file, the non-executed lines are referring to 
+ * the check in case malloc() fails, which is a very unlikely case.
+ * 
+ * ```c
+ * if(arg_str == NULL) {
+ *     fprintf(stderr, "Couldn't allocate memory.\n");
+ *     return 1;
+ * }
+ * ```
+ * 
+ * The corresponding .gcov files can be found in the following links: 
+ * roman.c.gcov and roman-to-int.c.gcov
+ * 
+ * Static analysis
+ * ---------------
+ * I ran the command `cppcheck --enable=warning .` in the source code directory,
+ * obtaining the following results:
+ * 
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * Checking src/roman-to-int.c...
+ * 1/7 files checked 14% done
+ * Checking src/roman.c...
+ * 2/7 files checked 28% done
+ * Checking test/testBin.c...
+ * 3/7 files checked 42% done
+ * Checking test/testIncreasing.c...
+ * 4/7 files checked 57% done
+ * Checking test/testSimple.c...
+ * 5/7 files checked 71% done
+ * Checking test/testSubtracting.c...
+ * 6/7 files checked 85% done
+ * Checking test/testUntil3000.c...
+ * 7/7 files checked 100% done
+ * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/

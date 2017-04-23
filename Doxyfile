@@ -781,7 +781,16 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = "/media/data/Dropbox/2017-01/Métodos de Programação/libroman/"
+INPUT					= "README.md" \
+						  "mainpage.dox" \
+						  "src/roman.c" "src/roman-to-int.c" \
+						  "include/roman.h" \
+						  "test/testSimple.c" "doc/testSimple.md" \
+						  "test/testIncreasing.c" "doc/testIncreasing.md" \
+						  "test/testSubtracting.c" "doc/testSubtracting.md" \
+						  "test/testUntil3000.c" "doc/testUntil3000.md" \
+						  "test/testBin.c" "doc/testBin.md" \
+						  "roman.c.gcov" "roman-to-int.c.gcov"
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -896,7 +905,7 @@ EXCLUDE_SYMBOLS        =
 # that contain example code fragments that are included (see the \include
 # command).
 
-EXAMPLE_PATH           = examples/
+EXAMPLE_PATH           = test/
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp and
@@ -985,7 +994,7 @@ USE_MDFILE_AS_MAINPAGE =
 # also VERBATIM_HEADERS is set to NO.
 # The default value is: NO.
 
-SOURCE_BROWSER         = NO
+SOURCE_BROWSER         = YES
 
 # Setting the INLINE_SOURCES tag to YES will include the body of functions,
 # classes and enums directly into the documentation.
@@ -1656,7 +1665,7 @@ EXTRA_SEARCH_MAPPINGS  =
 # If the GENERATE_LATEX tag is set to YES, doxygen will generate LaTeX output.
 # The default value is: YES.
 
-GENERATE_LATEX         = NO
+GENERATE_LATEX         = YES
 
 # The LATEX_OUTPUT tag is used to specify where the LaTeX docs will be put. If a
 # relative path is entered the value of OUTPUT_DIRECTORY will be put in front of

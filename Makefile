@@ -20,7 +20,7 @@ BINS = roman-to-int
 LIB_FINAL = roman
 
 # The names of the tests to run
-TESTS = testSimple testIncreasing testSubtracting testUntil3000 testBin3000
+TESTS = testSimple testIncreasing testSubtracting testUntil3000 testBin
 
 # Generating the final .so path
 LIB_NAME=lib$(LIB_FINAL).a
