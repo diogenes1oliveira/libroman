@@ -118,7 +118,14 @@ int roman_to_int(const char *input) {
 	for(i = length - 1; i >= 0; --i) {
 		algNow = input[i];
 		
+		valueNow = alg_value(algNow);
+		if(valueNow == -1)
+			return -1;
+		
 		if(algBefore != algNow) {
+			if(valueNow < valueBefore && repetitions > 1)
+				return -1;
+			
 			repetitions = 1;
 		}
 		else {
@@ -135,10 +142,6 @@ int roman_to_int(const char *input) {
 			return -1;
 		
 		if(repetitions > 3)
-			return -1;
-		
-		valueNow = alg_value(algNow);
-		if(valueNow == -1)
 			return -1;
 		
 		/* If TRUE, I am in the subtracting mode: a smaller algarism coming

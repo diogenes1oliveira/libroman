@@ -73,7 +73,7 @@ $(OBJ_DIR)/%.o: $(SRC)/%.c $(HEADERS)
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(FLAGS) -c -o $@ $< $(HEADERS_FLAG)
 
-$(BIN)/%: $(SRC)/%.c $(HEADERS)
+$(BIN)/%: $(SRC)/%.c $(HEADERS) $(LIB_FULLNAME)
 	mkdir -p $(BIN)
 	$(CC) $(FLAGS) -c -o $(OBJ_DIR)/$*.o $< $(HEADERS_FLAG)
 	$(CC) $(FLAGS) -o $@ $(OBJ_DIR)/$*.o $(HEADERS_FLAG) $(LIBS_FLAG) -l$(LIB_FINAL)

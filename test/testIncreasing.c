@@ -56,6 +56,14 @@ TEST(ComplexInput, TooManyRepetitions) {
 }
 //! [ComplexInput, TooManyRepetitions]
 
+//! [ComplexInput, SubtractingBeforeRepetition]
+TEST(ComplexInput, SubtractingBeforeRepetition) {
+	EXPECT_EQ(roman_to_int("IXX"), -1);
+	EXPECT_EQ(roman_to_int("CMMM"), -1);
+	EXPECT_EQ(roman_to_int("XCC"), -1);
+}
+//! [ComplexInput, SubtractingBeforeRepetition]
+
 int main(int argc, char **argv) {
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
