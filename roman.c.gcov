@@ -1,0 +1,172 @@
+        -:    0:Source:src/roman.c
+        -:    0:Graph:obj/roman.gcno
+        -:    0:Data:obj/roman.gcda
+        -:    0:Runs:10
+        -:    0:Programs:5
+        -:    1:#include "roman.h"
+        -:    2:
+        -:    3:#include <stdbool.h>
+        -:    4:#include <string.h>
+        -:    5:
+        -:    6:/**
+        -:    7: * Returns the length of a valid string.
+        -:    8: * 
+        -:    9: * If the string is not valid (i.e., NULL or empty),
+        -:   10: * returns -1.
+        -:   11: */
+     3060:   12:static int string_length(const char *str) {
+        -:   13:	return (
+        -:   14:		str == NULL ?
+        -:   15:		-1 :
+     3059:   16:		strlen(str)
+     6119:   17:	);
+        -:   18:}
+        -:   19:
+        -:   20:/**
+        -:   21: * Returns the integer value of a single Roman algarism.
+        -:   22: * 
+        -:   23: * The corresponding value is given in the table below:
+        -:   24: * | Character | Value |
+        -:   25: * |-----------|-------|
+        -:   26: * |     I     |    1  |
+        -:   27: * |     V     |    5  |
+        -:   28: * |     X     |   10  |
+        -:   29: * |     L     |   50  |
+        -:   30: * |     C     |  100  |
+        -:   31: * |     D     |  500  |
+        -:   32: * |     M     | 1000  |
+        -:   33: */
+    21158:   34:static int alg_value(char alg) {
+        -:   35:	int value;
+        -:   36:	
+    21158:   37:	switch(alg) {
+        -:   38:		case 'I':
+     4240:   39:			value = 1;
+     4240:   40:			break;
+        -:   41:		case 'V':
+     1511:   42:			value = 5;
+     1511:   43:			break;
+        -:   44:		case 'X':
+     4539:   45:			value = 10;
+     4539:   46:			break;
+        -:   47:		case 'L':
+     1508:   48:			value = 50;
+     1508:   49:			break;
+        -:   50:		case 'C':
+     4516:   51:			value = 100;
+     4516:   52:			break;
+        -:   53:		case 'D':
+     1510:   54:			value = 500;
+     1510:   55:			break;
+        -:   56:		case 'M':
+     3327:   57:			value = 1000;
+     3327:   58:			break;
+        -:   59:		default:
+        7:   60:			value = -1;
+        -:   61:	}
+        -:   62:	
+    21158:   63:	return value;
+        -:   64:}
+        -:   65:
+        -:   66:/**
+        -:   67: * Checks if the Roman algarism is repeatable (i.e., it's not 'V', 'L' or 'D').
+        -:   68: */
+     6452:   69:static bool alg_can_repeat(char alg) {
+     6452:   70:	return !(alg == 'V' || alg == 'L' || alg == 'D');
+        -:   71:}
+        -:   72:
+        -:   73:/**
+        -:   74: * Checks if the Roman algarism `now` can come before the character `before`
+        -:   75: * in a valid string, meaning its value is negative. The rules for such
+        -:   76: * preceding characters are as below:
+        -:   77: * 
+        -:   78: * | Character     | Can appear before |
+        -:   79: * |---------------|-------------------|
+        -:   80: * |    'I'        |    V, X           |
+        -:   81: * |    'X'        |    L, C           |
+        -:   82: * |    'C'        |    D, M           |
+        -:   83: * | 'V', 'L', 'D' |    None           |
+        -:   84: */
+     1818:   85:static bool alg_can_come_before(char now, char before) {
+     1818:   86:	switch(now) {
+        -:   87:		case 'I':
+      609:   88:			return (before == 'X' || before == 'V');
+        -:   89:			break;
+        -:   90:		case 'X':
+      604:   91:			return (before == 'C' || before == 'L');
+        -:   92:			break;
+        -:   93:		case 'C':
+      601:   94:			return (before == 'D' || before == 'M');
+        -:   95:			break;
+        -:   96:		default:
+        4:   97:			return false;
+        -:   98:	}
+        -:   99:}
+        -:  100:
+     3060:  101:int roman_to_int(const char *input) {
+        -:  102:	int length;
+        -:  103:	int i;
+     3060:  104:	int finalValue = 0;
+     3060:  105:	int valueNow = -1;
+     3060:  106:	int valueBefore = -1;
+     3060:  107:	char algNow = '\0';
+     3060:  108:	char algBefore = '\0';
+     3060:  109:	int repetitions = 0;
+     3060:  110:	bool isSubtracting = false;
+        -:  111:	
+        -:  112:	/* This checks if the string is valid */
+     3060:  113:	length = string_length(input);
+     3060:  114:	if(length <= 0)
+        2:  115:		return -1;
+        -:  116:	
+        -:  117:	/* Loop through the string, starting from the end */
+    24182:  118:	for(i = length - 1; i >= 0; --i) {
+    21158:  119:		algNow = input[i];
+        -:  120:		
+    21158:  121:		valueNow = alg_value(algNow);
+    21158:  122:		if(valueNow == -1)
+        7:  123:			return -1;
+        -:  124:		
+    21151:  125:		if(algBefore != algNow) {
+    14699:  126:			if(valueNow < valueBefore && repetitions > 1)
+        4:  127:				return -1;
+        -:  128:			
+    14695:  129:			repetitions = 1;
+        -:  130:		}
+        -:  131:		else {
+     6452:  132:			if(!alg_can_repeat(algNow))
+        4:  133:				return -1;
+        -:  134:			
+     6448:  135:			++repetitions;
+        -:  136:		}
+        -:  137:		
+        -:  138:		/* A smaller algarism coming before a greater one (IX, for instance)
+        -:  139:		 * can't be repeated.
+        -:  140:		 */
+    21143:  141:		if(isSubtracting && repetitions >= 2)
+        4:  142:			return -1;
+        -:  143:		
+    21139:  144:		if(repetitions > 3)
+        7:  145:			return -1;
+        -:  146:		
+        -:  147:		/* If TRUE, I am in the subtracting mode: a smaller algarism coming
+        -:  148:		 * before a greater one.
+        -:  149:		 */
+    21132:  150:		if(valueNow < valueBefore) {
+     1818:  151:			if(!alg_can_come_before(algNow, algBefore))
+        8:  152:				return -1;
+        -:  153:			
+     1810:  154:			finalValue -= valueNow;
+     1810:  155:			isSubtracting = true;
+        -:  156:		}
+        -:  157:		else {
+    19314:  158:			finalValue += valueNow;
+    19314:  159:			isSubtracting = false;
+        -:  160:		}
+        -:  161:		
+    21124:  162:		algBefore = algNow;
+    21124:  163:		valueBefore = valueNow;
+        -:  164:	}
+        -:  165:	
+     3024:  166:	return finalValue;
+        -:  167:}

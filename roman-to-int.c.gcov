@@ -1,0 +1,46 @@
+        -:    0:Source:src/roman-to-int.c
+        -:    0:Graph:obj/roman-to-int.gcno
+        -:    0:Data:obj/roman-to-int.gcda
+        -:    0:Runs:6
+        -:    0:Programs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:#include <string.h>
+        -:    4:#include <ctype.h>
+        -:    5:
+        -:    6:#include "roman.h"
+        -:    7:
+        6:    8:int main(int argc, char *argv[]) {
+        -:    9:	
+        6:   10:	if(argc < 2) {
+        1:   11:		fprintf(stderr, "No Roman string was passed as an argument.\n");
+        1:   12:		return 1;
+        -:   13:	}
+        -:   14:	
+        5:   15:	if(argc > 2) {
+        1:   16:		fprintf(stderr, "Too many command-line arguments.\n");
+        1:   17:		return 1;
+        -:   18:	}
+        -:   19:	
+        4:   20:	int arg_len = strlen(argv[1]);
+        4:   21:	char * arg_str = (char *) malloc(arg_len + 1);
+        -:   22:	
+        4:   23:	if(arg_str == NULL) {
+    #####:   24:		fprintf(stderr, "Couldn't allocate memory.\n");
+    #####:   25:		return 1;
+        -:   26:	}
+        4:   27:	memset(arg_str, 0, (arg_len + 1) * sizeof(char));
+        -:   28:	
+       15:   29:	for(int i = 0; i < arg_len; ++i)
+       11:   30:		arg_str[i] = toupper(argv[1][i]);
+        -:   31:	
+        4:   32:	int value = roman_to_int(arg_str);
+        -:   33:	
+        4:   34:	if(value == -1) {
+        2:   35:		fprintf(stderr, "Invalid roman numeral.\n");
+        2:   36:		return -1;
+        -:   37:	}
+        -:   38:	
+        2:   39:	printf("%d\n", value);
+        2:   40:	return 0;
+        -:   41:}
